@@ -1,9 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tiktiok/pages/profile_screen.dart';
 import 'package:tiktiok/theme/color.dart';
+import 'package:tiktiok/widgets/footer_home_screen.dart';
 import 'package:tiktiok/widgets/tik_tok_icons.dart';
 import 'package:tiktiok/widgets/upload_icon.dart';
 
-import 'home_page.dart';
+import '../widgets/header_home_screen.dart';
+import 'following_screen.dart';
+import 'for_you_screen.dart';
+import 'login_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,125 +20,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  PageController controller = PageController(initialPage: 1);
+  int pageIndex = 0;
+  bool hasData = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: getBody(),
-      bottomNavigationBar: getFooter(),
+      // StreamBuilder(
+      //     stream: FirebaseAuth.instance.authStateChanges(),
+      //     builder: (context,snapShot){
+      //       if(snapShot.connectionState == ConnectionState.waiting){
+      //         return const Center(child: CircularProgressIndicator());
+      //       }
+      //       else if(snapShot.hasError){
+      //         Get.snackbar('Something went wrong', 'Please try again',
+      //             colorText: Colors.red,backgroundColor: ofWhiteColor,snackPosition: SnackPosition.BOTTOM
+      //         );
+      //       }
+      //       else if(snapShot.hasData){
+      //         getBody();
+      //         setState(() {
+      //           hasData  = true;
+      //         });
+      //       }
+      //       return const LoginScreen();
+      //     }),
+      bottomNavigationBar:
+          pageIndex == 2 ? null : getFooter(context, pageIndex: 0)
     );
   }
   Widget getBody(){
-    return IndexedStack(
-      index: pageIndex,
-      children:const [
-        HomePage(),
-        Center(
-          child: Text('Discover',style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-          ),),
-        ),
-        Center(
-          child: Text('Upload',style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-          ),),
-        ),
-        Center(
-          child: Text('inbox',style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-          ),),
-        ),
-        Center(
-          child: Text('Profile',style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-          ),),
-        )
-      ],
-    );
-}
-  Widget getFooter() {
-    List bottomItem = [
-      {
-        'icon': Icons.home,
-        'label': 'Home',
-        'isIcon': true,
-      },
-      {
-        'icon': Icons.search,
-        'label': 'Discover',
-        'isIcon': true,
-      },
-      {
-        'icon': '',
-        'label': '',
-        'isIcon': false,
-      },
-      {
-        'icon': Icons.favorite,
-        'label': 'Inbox',
-        'isIcon': true,
-      },
-      {
-        'icon': Icons.person,
-        'label': 'Me',
-        'isIcon': true,
-      }
-    ];
-    return Container(
-      // height: MediaQuery.of(context).size.height * 0.05,
-      height: 80,
-      width: MediaQuery.of(context).size.width,
-      color: appBgColor,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(bottomItem.length, (index) {
-            return bottomItem[index]['isIcon']
-                ? InkWell(
-              onTap: (){
-                selectedIndex (index);
-              },
-                  child: Column(
-                      children: [
-                        Icon(
-                          bottomItem[index]['icon'],
-                          color: white,
-                          // size: 20,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          bottomItem[index]['label'],
-                          style: const TextStyle(
-                            color: white,
-                            fontSize: 10,
-                          ),
-                        )
-                      ],
-                    ),
-                )
-                : InkWell(
-                onTap: (){
-                  selectedIndex(index);
-                },
-                child:  UploadIcon());
-          }),
-        ),
-      ),
-    );
-  }
-  int pageIndex=0;
-  selectedIndex (int index){
-    setState(() {
-      pageIndex = index;
-    });
+    return PageView(
+        onPageChanged: (value) {
+          setState(() {
+            pageIndex = value;
+          });
+        },
+        controller: controller,
+        children:  [
+          FollowingScreen(pageIndex: pageIndex,),
+          MainScreenContent(pageIndex: pageIndex),
+          const ProfileScreen(),
+        ]);
   }
 }
