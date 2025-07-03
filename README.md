@@ -1,16 +1,54 @@
-# tiktiok
+🎥 TikTok Application Clone
+TikTok Clone is a high-fidelity Flutter application that recreates the core experience of the popular TikTok platform. With smooth vertical video transitions, social interactivity, user profiles, and intuitive UI design, this clone offers a fully immersive video-sharing experience optimized for both iOS and Android.
 
-A new Flutter application.
+![social-tiktok-cover-img](https://github.com/user-attachments/assets/f0b7c44d-2ace-490b-bf22-a4d2aa798ea7)
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+### ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+📹 Vertical Video Feed: Endless scroll through short-form video content.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+❤️ User Interactions: Like, comment, share, and follow other users.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+👥 User Profiles: View follower stats and published videos.
+
+🔐 Authentication: Sign up with Google, Facebook, Twitter, and Apple.
+
+🔄 Smooth UI Transitions: Fast and fluid video loading and swiping.
+
+🌐 REST API Integration: Backend support for real-time data.
+
+📱 Cross-Platform Support: Works seamlessly on both iOS and Android.
+
+---
+### 🛠️ Tech Stack
+
+| Technology | Description                                 |
+| ---------- | ------------------------------------------- |
+| Flutter    | For building cross-platform mobile UI       |
+| Dart       | Language used for app development           |
+| REST API   | Handles backend communication and data flow |
+| Postman    | Used for API testing and documentation      |
+
+---
+
+### 📁 Project Structure
+
+```
+lib/
+├── screens/        # Home, login, profile, and video feed screens
+├── models/         # Data models (User, Video, Comment)
+├── services/       # Backend services and API calls
+├── widgets/        # Reusable UI components (buttons, video players)
+└── main.dart       # App entry point
+
+```
+---
+🙋‍♂️ Author
+
+### Mohamed Mousa
+
+🔗 Portfolio: http://mohamedmousa.it
+
+🔗 LinkedIn: https://www.linkedin.com/in/mohamedmousa-/
