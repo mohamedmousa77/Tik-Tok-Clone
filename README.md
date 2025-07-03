@@ -1,4 +1,5 @@
-🎥 TikTok Application Clone
+### 🎥 TikTok Application Clone
+
 TikTok Clone is a high-fidelity Flutter application that recreates the core experience of the popular TikTok platform. With smooth vertical video transitions, social interactivity, user profiles, and intuitive UI design, this clone offers a fully immersive video-sharing experience optimized for both iOS and Android.
 
 ![social-tiktok-cover-img](https://github.com/user-attachments/assets/f0b7c44d-2ace-490b-bf22-a4d2aa798ea7)
